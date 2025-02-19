@@ -108,4 +108,33 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => console.error("Error booking:", error));
     });
 
+    const appointmentDate = document.getElementById("appointmentDate");
+    const appointmentDetails = document.getElementById("appointmentDetails");
+
+    appointmentDate.addEventListener("change", function () {
+        const selectedDate = appointmentDate.value;
+        if (!selectedDate) return;
+
+        fetch(`/get_appointments/?date=${selectedDate}`)
+            .then(response => response.json())
+            .then(data => {
+                appointmentDetails.innerHTML = ""; 
+
+                if (data.appointments.length === 0) {
+                    appointmentDetails.innerHTML = "<p>No appointments found for this date.</p>";
+                    return;
+                }
+
+                const list = document.createElement("ul");
+
+                data.appointments.forEach(app => {
+                    const item = document.createElement("li");
+                    item.textContent = `📅 ${app.slots} - ${app.name} 📞 ${app.phone}`;
+                    list.appendChild(item);
+                });
+
+                appointmentDetails.appendChild(list);
+            })
+            .catch(error => console.error("Error fetching appointments:", error));
+    });
 });
