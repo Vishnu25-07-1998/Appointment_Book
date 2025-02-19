@@ -93,6 +93,11 @@ input[type="text"] {
 
 .disabled-slot {
     background-color: red;
+    cursor: no-drop;
+}
+
+.disabled-slot:hover {
+    background-color: red;
 }
 
 .get-date {
