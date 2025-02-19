@@ -51,3 +51,22 @@ def book_appointment(request):
             return JsonResponse({"error": str(e)}, status=500)
 
     return JsonResponse({"error": "Invalid request"}, status=400)
+
+def get_appointments_by_date(request):
+    if request.method == "GET":
+        selected_date = request.GET.get("date")
+
+        if not selected_date:
+            return JsonResponse({"error": "Date is required"}, status=400)
+
+        try:
+            date = datetime.strptime(selected_date, "%Y-%m-%d").date()
+            appointments = Appointment.objects.filter(date=date).values("name", "phone", "slots")
+            print('appointments : ',appointments)
+
+            return JsonResponse({"appointments": list(appointments)}, status=200)
+
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
+
+    return JsonResponse({"error": "Invalid request"}, status=400)
