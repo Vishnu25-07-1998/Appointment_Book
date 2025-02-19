@@ -94,3 +94,8 @@ input[type="text"] {
 .disabled-slot {
     background-color: red;
 }
+
+.get-date {
+    max-width: 300px;
+    margin: 20px 0;
+}
