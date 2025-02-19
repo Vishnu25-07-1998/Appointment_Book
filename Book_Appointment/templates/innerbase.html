@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css_files/innerbase.css' %}">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <nav>
+            <button href="#" id="bookAppointment">Book an appointment</button>
+        </nav>
+        <main>
+            <div id="appointmentModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <form id="appointmentForm">
+                        {% csrf_token %}
+                        <h2>Book an Appointment</h2>
+                        <label for="date">Date:</label>
+                        <input type="date" id="date" required>
+                        <div id="slotsContainer" style="display: none;">
+                            <h3>Available Slots</h3>
+                            <div id="timeSlots">
+                            </div>
+
+                            <div id="nameField" class="input-group" style="display: none;">
+                                <h3>Enter Your Name</h3>
+                                <input type="text" id="name" placeholder="Full Name">
+                            </div>
+
+                            <div id="phoneField" class="input-group" style="display: none;">
+                                <h3>Enter Your Phone Number</h3>
+                                <input type="text" id="phone" placeholder="Phone Number">
+                            </div>
+                            <button type="submit" id="confirmBooking">Confirm Booking</button>
+                        </div>
+                    </form>
+                </div>
+        </main>
+    </div>
+    <script src="{% static 'js_files/innerbase.js' %}"></script>
+</body>
+
+</html>
